@@ -45,4 +45,4 @@ def test_api(api_url):
 
 # Save the XML tree to file
 tree = ET.ElementTree(testsuites)
-tree.write("test_result.xml", encoding="UTF-8", xml_declaration=True)
+tree.write("test_result2.xml", encoding="UTF-8", xml_declaration=True)
