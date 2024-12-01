@@ -48,6 +48,7 @@ def test_api(api_url):
         testcase = ET.SubElement(testsuite, "testcase", classname="test", name=f"test_api{api_url}", time="0.001")
         
         status_ = ET.SubElement(testsuite, "status", classname="test", name=f"status_cod={status_code}", time="0.001")
+        
         result_ = ET.SubElement(testsuite, "result", classname="test", name=f"result_={response_text}", time="0.001")
 
        
