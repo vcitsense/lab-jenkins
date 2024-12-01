@@ -1,5 +1,6 @@
 import pytest
 import requests
+import xml.etree.ElementTree as ET
 
 base_url = "http://127.0.0.1:5000"
 
@@ -28,6 +29,10 @@ apis = [
     "/calc/log/0",
 ]
 
+# Prepare XML structure
+testsuites = ET.Element("testsuites")
+testsuite = ET.SubElement(testsuites, "testsuite", name="pytest", errors="0", failures="0", skipped="0", tests="21", time="0.181", timestamp="2024-12-01T04:46:20.166656+00:00", hostname="eebbdce055b4")
+
 # Usar parametrize para pasar las rutas de la API a la función de prueba
 @pytest.mark.parametrize("api_url", apis)
 def test_api(api_url):
@@ -35,27 +40,23 @@ def test_api(api_url):
         # Realizar la solicitud GET a la API
         response = requests.get(f"{base_url}{api_url}")
         
-        # Registrar la URL que se está probando
-        print(f"Testing {api_url}:")
-        print(f"URL: {base_url}{api_url}")
+        # Crear el nombre del caso de prueba
+        testcase = ET.SubElement(testsuite, "testcase", classname="test", name=f"test_api{api_url}", time="0.001")
         
-        # Verificar si la respuesta es exitosa (200)
+        # Agregar detalles de la respuesta
         if response.status_code == 200:
-            print(f"Status Code: 200")
-            print(f"Response: {response.text}")
-            print("Success: The request was successful.")
+            ET.SubElement(testcase, "status", code="200", response=response.text)
         elif response.status_code == 400:
-            print(f"Status Code: 400")
-            print(f"Error Response: {response.text}")
-            print("Failure: The request returned a bad request error.")
+            ET.SubElement(testcase, "status", code="400", response=response.text)
         elif response.status_code == 500:
-            print(f"Status Code: 500")
-            print(f"Error Response: {response.text}")
-            print("Failure: The request returned an internal server error.")
+            ET.SubElement(testcase, "status", code="500", response=response.text)
         else:
-            print(f"Status Code: {response.status_code}")
-            print(f"Response: {response.text}")
-        print("\n")
+            ET.SubElement(testcase, "status", code=str(response.status_code), response=response.text)
+        
     except requests.exceptions.RequestException as e:
-        print(f"Error testing {api_url}: {e}")
-        print("\n")
+        testcase = ET.SubElement(testsuite, "testcase", classname="test", name=f"test_api{api_url}", time="0.001")
+        ET.SubElement(testcase, "status", code="Error", response=str(e))
+
+# Write the updated XML to file
+tree = ET.ElementTree(testsuites)
+tree.write("test_result.xml", encoding="UTF-8", xml_declaration=True)
