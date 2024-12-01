@@ -40,12 +40,14 @@ def test_api(api_url):
         # Realizar la solicitud GET a la API
         response = requests.get(f"{base_url}{api_url}")
         
-        # Crear el nombre del caso de prueba
-        testcase = ET.SubElement(testsuite, "testcase", classname="test", name=f"test_api{api_url}", time="0.001")
-        
         # Add the response details to the testcase
         status_code = str(response.status_code)
         response_text = response.text
+        
+        # Crear el nombre del caso de prueba
+        testcase = ET.SubElement(testsuite, "testcase", classname="test", name=f"test_api{api_url}", time="0.001", status=f"{status_code}", response=f"{response_text}")
+        
+        
         
         # Check if the response status code is successful (200)
         if response.status_code == 200:
