@@ -13,6 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Make sure pytest is included in requirements.txt or install it directly
 RUN pip install pytest
 RUN pip install requests
+RUN pip install pytest-html
 
 # Exponer el puerto que usará Flask
 EXPOSE 5000
