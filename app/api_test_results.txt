@@ -1,0 +1,126 @@
+Testing /calc/add/10/5:
+URL: http://127.0.0.1:5000/calc/add/10/5
+Status Code: 200
+Response: 15
+Success: The request was successful.
+
+Testing /calc/add/abc/5:
+URL: http://127.0.0.1:5000/calc/add/abc/5
+Status Code: 400
+Error Response: Operator cannot be converted to number
+Failure: The request returned a bad request error.
+
+Testing /calc/add/10/0:
+URL: http://127.0.0.1:5000/calc/add/10/0
+Status Code: 200
+Response: 10
+Success: The request was successful.
+
+Testing /calc/substract/10/5:
+URL: http://127.0.0.1:5000/calc/substract/10/5
+Status Code: 200
+Response: 5
+Success: The request was successful.
+
+Testing /calc/substract/abc/5:
+URL: http://127.0.0.1:5000/calc/substract/abc/5
+Status Code: 400
+Error Response: Operator cannot be converted to number
+Failure: The request returned a bad request error.
+
+Testing /calc/substract/10/0:
+URL: http://127.0.0.1:5000/calc/substract/10/0
+Status Code: 200
+Response: 10
+Success: The request was successful.
+
+Testing /calc/multiply/10/5:
+URL: http://127.0.0.1:5000/calc/multiply/10/5
+Status Code: 200
+Response: 50
+Success: The request was successful.
+
+Testing /calc/multiply/abc/5:
+URL: http://127.0.0.1:5000/calc/multiply/abc/5
+Status Code: 400
+Error Response: Operator cannot be converted to number
+Failure: The request returned a bad request error.
+
+Testing /calc/multiply/10/0:
+URL: http://127.0.0.1:5000/calc/multiply/10/0
+Status Code: 200
+Response: 0
+Success: The request was successful.
+
+Testing /calc/divide/10/5:
+URL: http://127.0.0.1:5000/calc/divide/10/5
+Status Code: 200
+Response: 2.0
+Success: The request was successful.
+
+Testing /calc/divide/abc/5:
+URL: http://127.0.0.1:5000/calc/divide/abc/5
+Status Code: 400
+Error Response: Operator cannot be converted to number
+Failure: The request returned a bad request error.
+
+Testing /calc/divide/10/0:
+URL: http://127.0.0.1:5000/calc/divide/10/0
+Status Code: 400
+Error Response: Division by zero is not possible
+Failure: The request returned a bad request error.
+
+Testing /calc/power/2/3:
+URL: http://127.0.0.1:5000/calc/power/2/3
+Status Code: 200
+Response: 8
+Success: The request was successful.
+
+Testing /calc/power/abc/3:
+URL: http://127.0.0.1:5000/calc/power/abc/3
+Status Code: 400
+Error Response: Operator cannot be converted to number
+Failure: The request returned a bad request error.
+
+Testing /calc/power/2/0:
+URL: http://127.0.0.1:5000/calc/power/2/0
+Status Code: 200
+Response: 1
+Success: The request was successful.
+
+Testing /calc/sqrt/25:
+URL: http://127.0.0.1:5000/calc/sqrt/25
+Status Code: 200
+Response: 5.0
+Success: The request was successful.
+
+Testing /calc/sqrt/abc:
+URL: http://127.0.0.1:5000/calc/sqrt/abc
+Status Code: 400
+Error Response: Operator cannot be converted to number
+Failure: The request returned a bad request error.
+
+Testing /calc/sqrt/-25:
+URL: http://127.0.0.1:5000/calc/sqrt/-25
+Status Code: 400
+Error Response: Cannot calculate the square root of a negative number
+Failure: The request returned a bad request error.
+
+Testing /calc/log/100:
+URL: http://127.0.0.1:5000/calc/log/100
+Status Code: 200
+Response: 2.0
+Success: The request was successful.
+
+Testing /calc/log/abc:
+URL: http://127.0.0.1:5000/calc/log/abc
+Status Code: 400
+Error Response: Operator cannot be converted to number
+Failure: The request returned a bad request error.
+
+Testing /calc/log/0:
+URL: http://127.0.0.1:5000/calc/log/0
+Status Code: 400
+Error Response: Logarithm base 10 is only defined for positive numbers
+Failure: The request returned a bad request error.
+
