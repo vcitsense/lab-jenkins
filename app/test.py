@@ -31,7 +31,7 @@ apis = [
 
 # Prepare XML structure
 testsuites = ET.Element("testsuites")
-testsuite = ET.SubElement(testsuites, "testsuite", name="pytest", errors="0", failures="0", skipped="0", tests="21", time="0.181", timestamp="2024-12-01T04:46:20.166656+00:00", hostname="eebbdce055b4")
+testsuite = ET.SubElement(testsuites, "testsuite", name="pytest", errors="0", failures="0", skipped="0", tests="21", time="0.181", timestamp="2024-12-01T04:51:11.422039+00:00", hostname="8e83d85069cd")
 
 # Usar parametrize para pasar las rutas de la API a la función de prueba
 @pytest.mark.parametrize("api_url", apis)
@@ -43,15 +43,19 @@ def test_api(api_url):
         # Crear el nombre del caso de prueba
         testcase = ET.SubElement(testsuite, "testcase", classname="test", name=f"test_api{api_url}", time="0.001")
         
-        # Agregar detalles de la respuesta
+        # Add the response details to the testcase
+        status_code = str(response.status_code)
+        response_text = response.text
+        
+        # Check if the response status code is successful (200)
         if response.status_code == 200:
-            ET.SubElement(testcase, "status", code="200", response=response.text)
+            ET.SubElement(testcase, "status", code=status_code, response=response_text)
         elif response.status_code == 400:
-            ET.SubElement(testcase, "status", code="400", response=response.text)
+            ET.SubElement(testcase, "status", code=status_code, response=response_text)
         elif response.status_code == 500:
-            ET.SubElement(testcase, "status", code="500", response=response.text)
+            ET.SubElement(testcase, "status", code=status_code, response=response_text)
         else:
-            ET.SubElement(testcase, "status", code=str(response.status_code), response=response.text)
+            ET.SubElement(testcase, "status", code=status_code, response=response_text)
         
     except requests.exceptions.RequestException as e:
         testcase = ET.SubElement(testsuite, "testcase", classname="test", name=f"test_api{api_url}", time="0.001")
