@@ -45,7 +45,7 @@ def test_api(api_url):
         response_text = response.text
         
         # Crear el nombre del caso de prueba
-        testcase = ET.SubElement(testsuite, "testcase", classname="test", name=f"test_api{api_url}", time="0.001")
+        testcase = ET.SubElement(testsuite, "testcase", classname="test", name=f"test_apiiiiiiiiiiiii{api_url}", time="0.001")
         
         status_ = ET.SubElement(testsuite, "status", classname="test", name=f"status_cod={status_code}", time="0.001")
         
